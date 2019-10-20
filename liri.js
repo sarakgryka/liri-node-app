@@ -1,7 +1,11 @@
 require("dotenv").config();
 var axios = require("axios");
-
+//keys
 var keys = require("./keys.js");
+
+//Moment
+var moment = require('moment');
+moment().format();
 var artist;
 
 
@@ -36,7 +40,7 @@ switch (userInput) {
         console.log(artist);
 
         var bandsInTown = `https://rest.bandsintown.com/artists/${artist}/events?app_id=${keys.bandsInTown.id}`
-
+       
 
         axios
             .get(bandsInTown)
@@ -44,9 +48,15 @@ switch (userInput) {
 
                 for (let i = 0; i < response.data.length; i++) {
 
+                    let time = response.data[i].datetime;
+
+                  
+
                     console.log(`Venue: ${response.data[i].venue.name}`);
                     console.log(`Venue Location: ${response.data[i].venue.city}`);
-                    console.log(`Date of Event: ${response.data[i].venue.datetime}`);
+                 console.log(`Date of Event: ${moment(time, "YYYY-MM-DDTHH:mm:ss" ).format("MM/DD/YYYY")}`);
+                // console.log(`Date of Event: ${moment(time).format("MM/DD/YYYY")}`);
+                    // console.log(`Date of Event: ${response.data[i].venue.datetime}`);
                     console.log("========================================================================")
 
 
