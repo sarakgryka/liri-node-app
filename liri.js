@@ -17,6 +17,7 @@ var artist;
 var userInput = process.argv[2];
 var arguments = process.argv;
 var userSearch = "";
+var noSearch = "";
 
 
 for (let i = 3; i < arguments.length; i++) {
@@ -24,6 +25,7 @@ for (let i = 3; i < arguments.length; i++) {
     if (i > 3 && i < arguments.length) {
         userSearch = userSearch + "+" + arguments[i];
     }
+ 
 
 
     else {
@@ -77,13 +79,10 @@ switch (userInput) {
     case "spotify-this-song":
 
         spotify
-            .search({ type: 'track', query: userSearch })
+            .search({ type: 'track', query: userSearch || " Ace of Base The Sign" })
             .then(function (response) {
 
-                
-
-            
-
+               
                 
                 for (let i = 0; i < response.tracks.items.length; i++) {
 
@@ -99,6 +98,8 @@ switch (userInput) {
                 
             })
             .catch(function (err) {
+
+                
                 console.log(err);
             });
 
