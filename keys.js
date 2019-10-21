@@ -11,3 +11,8 @@ exports.bandsInTown = {
     id: process.env.app_id
 
 };
+
+exports.omdb = {
+
+    id: process.env.apikey
+}

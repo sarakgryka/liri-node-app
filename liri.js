@@ -14,10 +14,15 @@ var spotify = new Spotify(keys.spotify);
 
 var bandsInTown = `https://rest.bandsintown.com/artists/${artist}/events?app_id=${keys.bandsInTown.id}`
 var artist;
+
+var omdb = `http://www.omdbapi.com/?t=${title}&apikey=${keys.omdb.id}`
+
+
 var userInput = process.argv[2];
 var arguments = process.argv;
 var userSearch = "";
-var noSearch = "";
+var title = "";
+
 
 
 for (let i = 3; i < arguments.length; i++) {
@@ -25,7 +30,7 @@ for (let i = 3; i < arguments.length; i++) {
     if (i > 3 && i < arguments.length) {
         userSearch = userSearch + "+" + arguments[i];
     }
- 
+
 
 
     else {
@@ -82,24 +87,24 @@ switch (userInput) {
             .search({ type: 'track', query: userSearch || " Ace of Base The Sign" })
             .then(function (response) {
 
-               
-                
+
+
                 for (let i = 0; i < response.tracks.items.length; i++) {
 
-                console.log(`Artist(s): ${response.tracks.items[i].artists[0].name}`);
-                console.log(`Song Name: ${response.tracks.items[i].name}`);
-                console.log(`Link to Song: ${response.tracks.items[i].external_urls.spotify}`);
-                console.log(`Album: ${response.tracks.items[i].album.name}`);
-                console.log("=============================================================");
-                
-                
+                    console.log(`Artist(s): ${response.tracks.items[i].artists[0].name}`);
+                    console.log(`Song Name: ${response.tracks.items[i].name}`);
+                    console.log(`Link to Song: ${response.tracks.items[i].external_urls.spotify}`);
+                    console.log(`Album: ${response.tracks.items[i].album.name}`);
+                    console.log("=============================================================");
 
-            }
-                
+
+
+                }
+
             })
             .catch(function (err) {
 
-                
+
                 console.log(err);
             });
 
@@ -110,8 +115,47 @@ switch (userInput) {
         break;
 
     case "movie-this":
-        console.log("omdb");
+            function noSearch(){
+                   
+                console.log(`If you haven't watched "Mr. Nobody" then you should: http://www.imdb.com/title/tt0485947/`) 
+                return console.log("It's on Netflix!")  
+            }
+            title = userSearch
+            omdb = `http://www.omdbapi.com/?t=${title}&apikey=${keys.omdb.id}`
+
+        axios
+            .get(omdb)
+            .then(function (response) {
+
+        
+ title = userSearch || noSearch();
+
+               
+                if (title === userSearch){
+                
+                console.log("====================================");
+                console.log(`Title: ${response.data.Title}`);
+                console.log(`Year: ${response.data.Year}`);
+                console.log(`IMDB Rating: ${response.data.imdbRating}`);
+                console.log(`Rotten Tomatoes Rating: ${response.data.Ratings[0].Value}`);
+                console.log(`Country: ${response.data.Country}`);
+                console.log(`Language: ${response.data.Language}`);
+                console.log(`Plot: ${response.data.Plot}`);
+                console.log(`Actors: ${response.data.Actors}`)
+                console.log("====================================");
+               
+                }
+       })
+
+            .catch(function (error) {
+
+                return console.log(error);
+            })
+
+
+
         break;
+
 
     case "do-what-it-says":
         console.log("text");
