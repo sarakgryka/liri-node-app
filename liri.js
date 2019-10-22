@@ -43,10 +43,10 @@ for (let i = 3; i < arguments.length; i++) {
 
 switch (userInput) {
     case "concert-this":
-        console.log(userSearch);
+        
 
         artist = userSearch;
-        console.log(artist);
+       
 
         var bandsInTown = `https://rest.bandsintown.com/artists/${artist}/events?app_id=${keys.bandsInTown.id}`
 
@@ -146,6 +146,9 @@ switch (userInput) {
                 console.log("====================================");
                
                 }
+
+
+               
        })
 
             .catch(function (error) {
@@ -209,4 +212,22 @@ switch (userInput) {
         
         break;
 
+
 }
+
+var totalInput = userInput + " " + userSearch
+
+
+fs.appendFile("log.txt", totalInput, "utf8", function(err) {
+
+    // If an error was experienced we will log it.
+    if (err) {
+      console.log(err);
+    }
+  
+    // If no error is experienced, we'll log the phrase "Content Added" to our node console.
+    else {
+      console.log("Content Added!");
+    }
+  
+  });
