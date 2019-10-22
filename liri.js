@@ -45,10 +45,10 @@ switch (userInput) {
     case "concert-this":
         
 
-        artist = userSearch;
+        artist = userSearch || console.log("Oops! You forgot to put an artist/band! You can go to the Star Lounge!" );
        
 
-        var bandsInTown = `https://rest.bandsintown.com/artists/${artist}/events?app_id=${keys.bandsInTown.id}`
+     bandsInTown = `https://rest.bandsintown.com/artists/${artist}/events?app_id=${keys.bandsInTown.id}`
 
 
         axios
@@ -220,14 +220,10 @@ var totalInput = userInput + " " + userSearch
 
 fs.appendFile("log.txt", totalInput, "utf8", function(err) {
 
-    // If an error was experienced we will log it.
+
     if (err) {
       console.log(err);
     }
   
-    // If no error is experienced, we'll log the phrase "Content Added" to our node console.
-    else {
-      console.log("Content Added!");
-    }
-  
+    
   });
