@@ -12,7 +12,7 @@ The Liri application allows you to input the following commands with node.js.
   
  When you enter in concert-this the application will access the Bands In Town API and return the tour details for the artist/band you entered. 
  
- ![concert search](./liri pics/concertArtist.png)
+ ![concert search](./liri-pics/concertArtist.png)
 Format: ![Alt Text](url)
  
  
