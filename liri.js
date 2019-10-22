@@ -17,6 +17,7 @@ var artist;
 
 var omdb = `http://www.omdbapi.com/?t=${title}&apikey=${keys.omdb.id}`
 
+var fs = require("fs");
 
 var userInput = process.argv[2];
 var arguments = process.argv;
@@ -158,7 +159,54 @@ switch (userInput) {
 
 
     case "do-what-it-says":
-        console.log("text");
+
+            fs.readFile("./random.txt", "utf8",function(err, data) {
+                if (err) 
+                return console.log(err);
+
+
+                var whatSays = data.split(",");
+
+                arguments[2] = whatSays[0];
+                arguments[3] = whatSays[1];
+
+               if (arguments[2] === "spotify-this-song"){
+
+                spotify
+            .search({ type: 'track', query: arguments[3] })
+            .then(function (response) {
+
+
+
+                for (let i = 0; i < response.tracks.items.length; i++) {
+
+                    console.log(`Artist(s): ${response.tracks.items[i].artists[0].name}`);
+                    console.log(`Song Name: ${response.tracks.items[i].name}`);
+                    console.log(`Link to Song: ${response.tracks.items[i].external_urls.spotify}`);
+                    console.log(`Album: ${response.tracks.items[i].album.name}`);
+                    console.log("=============================================================");
+
+
+
+                }
+
+            })
+            .catch(function (err) {
+
+
+                console.log(err);
+            });
+
+
+
+
+
+
+               }
+
+
+              });
+        
         break;
 
 }
