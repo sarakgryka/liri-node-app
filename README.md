@@ -4,9 +4,9 @@
 
 The Liri application allows you to input the following commands with node.js.
 
-* concert-this <artist/band name>
-* spotify-this-song <song name>
-* movie-this <movie name>
+* concert-this 
+* spotify-this-song 
+* movie-this 
 * do-what-it-says 
   
   
@@ -78,6 +78,8 @@ If you do not enter in a movie name the following message will show.
 The last command the application takes is do-what-you-say. The do-what-you-say command will access the text file and return the command saved in the file. 
 
 ![do what](./liri-pics/dowhat.PNG)
+![do what](./liri-pics/dowhat2.PNG)
+
  
 
 Below is also a link to a video of the application in action!
