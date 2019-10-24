@@ -19,6 +19,11 @@ The Liri application allows you to input the following commands with node.js.
  
  ![concert search](./liri-pics/concertArtist.PNG)
  
+ The band/artist can be more than one word.
+ 
+ 
+  ![concert search](./liri-pics/concertArtists.PNG)
+  
  If you do not enter in an artist/band name you will recieve the message below.
  
  
@@ -35,12 +40,16 @@ The Liri application allows you to input the following commands with node.js.
  * A preview link of the song from Spotify
  * The album the song is from 
  
- ![concert search2](./liri-pics/spotifySong.PNG)
+ ![spotify search2](./liri-pics/spotifySong.PNG)
+ 
+ The song name can have multiple words.
+ 
+ ![spotify search2](./liri-pics/spotifySongs.PNG)
  
  If you do not enter a song, the default song will return information for Ace of Base song "The Sign"
  
  
-  ![concert search2](./liri-pics/spotify.PNG)
+  ![spotify](./liri-pics/spotify.PNG)
   
   When you enter movie-this the application will access the OMDB API and return information about the movie name entered.
   
@@ -56,15 +65,19 @@ The Liri application allows you to input the following commands with node.js.
    * Actors in the movie.
    
    
-![concert search2](./liri-pics/movieName.PNG)
+![movie search](./liri-pics/movieName.PNG)
+
+The movie name can include multiple words. 
+
+![movie search](./liri-pics/movieNames.PNG)
 
 If you do not enter in a movie name the following message will show.
 
-![concert search2](./liri-pics/movie.PNG)
+![movie](./liri-pics/movie.PNG)
 
 The last command the application takes is do-what-you-say. The do-what-you-say command will access the text file and return the command saved in the file. 
 
-![concert search2](./liri-pics/doWhat.PNG)
+![do what](./liri-pics/dowhat.PNG)
  
 
 Below is also a link to a video of the application in action!
