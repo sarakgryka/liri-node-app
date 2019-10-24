@@ -43,12 +43,12 @@ for (let i = 3; i < arguments.length; i++) {
 
 switch (userInput) {
     case "concert-this":
-        
 
-        artist = userSearch || console.log("Oops! You forgot to put an artist/band! You can go to the Star Lounge!" );
-       
 
-     bandsInTown = `https://rest.bandsintown.com/artists/${artist}/events?app_id=${keys.bandsInTown.id}`
+        artist = userSearch || console.log("Oops! You forgot to put an artist/band! You can go to the Star Lounge!");
+
+
+        bandsInTown = `https://rest.bandsintown.com/artists/${artist}/events?app_id=${keys.bandsInTown.id}`
 
 
         axios
@@ -116,40 +116,40 @@ switch (userInput) {
         break;
 
     case "movie-this":
-            function noSearch(){
-                   
-                console.log(`If you haven't watched "Mr. Nobody" then you should: http://www.imdb.com/title/tt0485947/`) 
-                return console.log("It's on Netflix!")  
-            }
-            title = userSearch
-            omdb = `http://www.omdbapi.com/?t=${title}&apikey=${keys.omdb.id}`
+        function noSearch() {
+
+            console.log(`If you haven't watched "Mr. Nobody" then you should: http://www.imdb.com/title/tt0485947/`)
+            return console.log("It's on Netflix!")
+        }
+        title = userSearch
+        omdb = `http://www.omdbapi.com/?t=${title}&apikey=${keys.omdb.id}`
 
         axios
             .get(omdb)
             .then(function (response) {
 
-        
- title = userSearch || noSearch();
 
-               
-                if (title === userSearch){
-                
-                console.log("====================================");
-                console.log(`Title: ${response.data.Title}`);
-                console.log(`Year: ${response.data.Year}`);
-                console.log(`IMDB Rating: ${response.data.imdbRating}`);
-                console.log(`Rotten Tomatoes Rating: ${response.data.Ratings[0].Value}`);
-                console.log(`Country: ${response.data.Country}`);
-                console.log(`Language: ${response.data.Language}`);
-                console.log(`Plot: ${response.data.Plot}`);
-                console.log(`Actors: ${response.data.Actors}`)
-                console.log("====================================");
-               
+                title = userSearch || noSearch();
+
+
+                if (title === userSearch) {
+
+                    console.log("====================================");
+                    console.log(`Title: ${response.data.Title}`);
+                    console.log(`Year: ${response.data.Year}`);
+                    console.log(`IMDB Rating: ${response.data.imdbRating}`);
+                    console.log(`Rotten Tomatoes Rating: ${response.data.Ratings[0].Value}`);
+                    console.log(`Country: ${response.data.Country}`);
+                    console.log(`Language: ${response.data.Language}`);
+                    console.log(`Plot: ${response.data.Plot}`);
+                    console.log(`Actors: ${response.data.Actors}`)
+                    console.log("====================================");
+
                 }
 
 
-               
-       })
+
+            })
 
             .catch(function (error) {
 
@@ -163,53 +163,109 @@ switch (userInput) {
 
     case "do-what-it-says":
 
-            fs.readFile("./random.txt", "utf8",function(err, data) {
-                if (err) 
-                return console.log(err);
+        let randomStringArray;
+        let randomStrings;
+
+        fs.readFile("./random.txt", "utf8", function (err, data) {
+            if (err) {
+                return console.log(err)
+            };
+
+            randomStringArray = data.toString().split("\n");
 
 
-                var whatSays = data.split(",");
 
-                arguments[2] = whatSays[0];
-                arguments[3] = whatSays[1];
+            randomStrings = randomStringArray[Math.floor(Math.random() * randomStringArray.length)];
 
-               if (arguments[2] === "spotify-this-song"){
+            // console.log(randomStrings);
+
+
+            var whatSays = randomStrings.split(",");
+
+            arguments[2] = whatSays[0];
+            arguments[3] = whatSays[1];
+
+            // console.log(whatSays[0]);
+            // console.log(whatSays[1])
+
+            if (arguments[2] === "spotify-this-song") {
 
                 spotify
-            .search({ type: 'track', query: arguments[3] })
-            .then(function (response) {
+                    .search({ type: 'track', query: arguments[3] })
+                    .then(function (response) {
 
 
 
-                for (let i = 0; i < response.tracks.items.length; i++) {
+                        for (let i = 0; i < response.tracks.items.length; i++) {
 
-                    console.log(`Artist(s): ${response.tracks.items[i].artists[0].name}`);
-                    console.log(`Song Name: ${response.tracks.items[i].name}`);
-                    console.log(`Link to Song: ${response.tracks.items[i].external_urls.spotify}`);
-                    console.log(`Album: ${response.tracks.items[i].album.name}`);
-                    console.log("=============================================================");
-
-
-
-                }
-
-            })
-            .catch(function (err) {
+                            console.log(`Artist(s): ${response.tracks.items[i].artists[0].name}`);
+                            console.log(`Song Name: ${response.tracks.items[i].name}`);
+                            console.log(`Link to Song: ${response.tracks.items[i].external_urls.spotify}`);
+                            console.log(`Album: ${response.tracks.items[i].album.name}`);
+                            console.log("=============================================================");
 
 
-                console.log(err);
-            });
+
+                        }
+
+                    })
+                    .catch(function (err) {
 
 
+                        console.log(err);
+                    });
 
 
 
 
-               }
 
 
-              });
-        
+            }
+
+            else if (arguments[2] === "movie-this") {
+              
+                title = arguments[3];
+                // console.log(title);
+                omdb = `http://www.omdbapi.com/?t=${title}&apikey=${keys.omdb.id}`
+
+                axios
+                    .get(omdb)
+                    .then(function (response) {
+
+
+                        title = arguments[3];
+                       
+
+
+
+                            console.log("====================================");
+                            console.log(`Title: ${response.data.Title}`);
+                            console.log(`Year: ${response.data.Year}`);
+                            console.log(`IMDB Rating: ${response.data.imdbRating}`);
+                            console.log(`Rotten Tomatoes Rating: ${response.data.Ratings[0].Value}`);
+                            console.log(`Country: ${response.data.Country}`);
+                            console.log(`Language: ${response.data.Language}`);
+                            console.log(`Plot: ${response.data.Plot}`);
+                            console.log(`Actors: ${response.data.Actors}`)
+                            console.log("====================================");
+
+                        
+
+
+
+                    })
+
+                    .catch(function (error) {
+
+                        return console.log(error);
+                    })
+
+
+            }
+
+
+        });
+
         break;
 
 
@@ -218,12 +274,12 @@ switch (userInput) {
 var totalInput = userInput + " " + userSearch
 
 
-fs.appendFile("log.txt", totalInput, "utf8", function(err) {
+fs.appendFile("log.txt", totalInput, "utf8", function (err) {
 
 
     if (err) {
-      console.log(err);
+        console.log(err);
     }
-  
-    
-  });
+
+
+});
